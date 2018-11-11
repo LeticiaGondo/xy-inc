@@ -1,4 +1,4 @@
-package br.com.zup.rest.springxyinc;
+package br.com.zup.recruitment.backend.springxyinc;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
