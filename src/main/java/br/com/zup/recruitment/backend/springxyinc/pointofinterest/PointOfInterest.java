@@ -1,8 +1,6 @@
 package br.com.zup.recruitment.backend.springxyinc.pointofinterest;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
@@ -11,10 +9,11 @@ import javax.validation.constraints.PositiveOrZero;
  * Created by Fellipe G on 11/11/2018.
  */
 @Entity
+@SequenceGenerator(name="seq_poi", initialValue=1000, allocationSize=1)
 public class PointOfInterest {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="seq_poi")
     private Long id; // point of interest's id
 
     @NotNull
