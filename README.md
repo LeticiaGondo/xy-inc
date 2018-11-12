@@ -50,6 +50,6 @@ Parâmetros
 ```
 
 ## Faltando 
-- [ ] Unit tests
+- [x] Unit tests (**dificuldade**. podem melhorar)
 - [ ] Data Validation
 - [ ] Class descriptions and Comments
