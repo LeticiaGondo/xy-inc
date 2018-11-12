@@ -13,20 +13,17 @@ import java.util.List;
  * Created by Fellipe G on 11/11/2018.
  */
 @RestController
-public class PointOfInterestResourse {
+public class PointOfInterestService {
 
     @Autowired
     private PointOfInterestRepository pointOfInterestRepository;
 
+    PointOfInterestController pointOfInterestController = new PointOfInterestController();
+
+
     @PostMapping("/points-of-interest")
-    public ResponseEntity<Object> createPointOfInterest(@Valid @RequestBody PointOfInterest pointOfInterest) {
-        PointOfInterest savedPointOfInterest = pointOfInterestRepository.save(pointOfInterest);
-
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(savedPointOfInterest.getId()).toUri();
-
-        return ResponseEntity.created(location).build();
-
+    public PointOfInterest createPointOfInterest(@Valid @RequestBody PointOfInterest pointOfInterest) {
+        return  pointOfInterestRepository.save(pointOfInterest);
     }
 
     @GetMapping("/points-of-interest")
@@ -39,12 +36,9 @@ public class PointOfInterestResourse {
                                                             @RequestParam("referenceY") int y,
                                                             @RequestParam("maxDistance") int maxDistance) {
 
-        PointOfInterestController pointOfInterestController = new PointOfInterestController();
         PointOfInterest referencePOI = new PointOfInterest("Reference poi",x,y);
 
         return pointOfInterestController.listPointsInsideRadius
-                (pointOfInterestRepository.findAll(), referencePOI,maxDistance);
+                (pointOfInterestRepository.findAll(), referencePOI, maxDistance);
     }
-
-
 }
