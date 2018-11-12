@@ -2,17 +2,20 @@ package br.com.zup.recruitment.backend.springxyinc.pointofinterest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Fellipe G on 11/12/2018.
@@ -27,9 +30,7 @@ public class PointOfInterestServiceTest {
     @MockBean
     private PointOfInterestController pointOfInterestController;
 
-    PointOfInterest mockCourse = new PointOfInterest("POI Test",12,10);
-
-    String exampleCourseJson = "{\"id\": 1000,\"name\": \"POI Test\",\"xCoordinate\": 12,\"yCoordinate\": 10}";
+    String examplePOIJson = "{\"id\": 1000,\"name\": \"POI Test\",\"xCoordinate\": 12,\"yCoordinate\": 10}";
 
     @Test
     public void retrieveAllPointsOfInterest() throws Exception {
@@ -73,5 +74,26 @@ public class PointOfInterestServiceTest {
                 .getContentAsString(), false);
     }
 
+    @Test
+    public void createPointOfInterest() throws Exception {
+        PointOfInterest mockCourse = new PointOfInterest("POI Test",12,10);
 
+        // Send course as body to /students/Student1/courses
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .post("/points-of-interest")
+                .accept(MediaType.APPLICATION_JSON).content(examplePOIJson)
+                .contentType(MediaType.APPLICATION_JSON);
+
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+        MockHttpServletResponse response = result.getResponse();
+
+        assertEquals(HttpStatus.CREATED.value(), response.getStatus());
+
+        String expected = "{\"id\":1000,\"name\":\"POI Test\",\"xCoordinate\":12,\"yCoordinate\":10}";
+
+        JSONAssert.assertEquals(expected, result.getResponse()
+                .getContentAsString(), false);
+
+    }
 }
