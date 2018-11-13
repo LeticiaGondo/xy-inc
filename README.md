@@ -49,7 +49,7 @@ Parâmetros
    - maxDistance: distância do raio (inteiro positivo)
 ```
 
-## Faltando 
+## Checklist 
 - [x] Unit tests (**dificuldade**. podem melhorar)
-- [ ] Data Validation
-- [ ] Class descriptions and Comments
+- [x] Data Validation
+- [x] Class descriptions and Comments
