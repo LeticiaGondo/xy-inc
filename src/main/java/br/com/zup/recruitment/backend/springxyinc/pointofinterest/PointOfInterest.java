@@ -7,6 +7,8 @@ import javax.validation.constraints.PositiveOrZero;
 
 /**
  * Created by Fellipe G on 11/11/2018.
+ * PointOfInterest entity class that represents the POINT_OF_INTEREST database table.
+ * Contains constructor methods, attributes, getters and setters.
  */
 @Entity
 @SequenceGenerator(name="seq_poi", initialValue=1000, allocationSize=1)

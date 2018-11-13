@@ -19,6 +19,8 @@ import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Fellipe G on 11/12/2018.
+ * Class PointOfInterestServiceTest
+ * Unit tests for the REST services from PointOfInterestService
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = PointOfInterestService.class, secure = false)
@@ -32,6 +34,11 @@ public class PointOfInterestServiceTest {
 
     String examplePOIJson = "{\"id\": 1000,\"name\": \"POI Test\",\"xCoordinate\": 12,\"yCoordinate\": 10}";
 
+    /**
+     * Asserting the return from the retrieveAllPointsOfInterest GET service on /points-of-interest,
+     * which lists all the registered points of interests
+     * @throws Exception
+     */
     @Test
     public void retrieveAllPointsOfInterest() throws Exception {
 
@@ -54,6 +61,11 @@ public class PointOfInterestServiceTest {
                 .getContentAsString(), false);
     }
 
+    /**
+     * Asserting the return from the 'retrievePointsInsideRadius' GET service on /points-of-interest/list-nearby,
+     * which gets the points by distance, withing a certain radius
+     * @throws Exception
+     */
     @Test
     public void retrievePointsInsideRadius() throws Exception {
 
@@ -74,6 +86,11 @@ public class PointOfInterestServiceTest {
                 .getContentAsString(), false);
     }
 
+    /**
+     * Asserting the return from the 'createPointOfInterest' POST service on /points-of-interest,
+     * which saves a new point of interest
+     * @throws Exception
+     */
     @Test
     public void createPointOfInterest() throws Exception {
         PointOfInterest mockCourse = new PointOfInterest("POI Test",12,10);
